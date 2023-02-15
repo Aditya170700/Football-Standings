@@ -15,7 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/jquery-3.6.3.min.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -34,11 +34,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li>
-                            <a href="{{ route('teams.index') }}" class="text-decoration-none">
-                                Team
-                            </a>
-                        </li>
+                        @auth
+                            <li class="me-2">
+                                <a href="{{ route('home') }}" class="text-decoration-none">
+                                    Klasemen
+                                </a>
+                            </li>
+                            <li class="me-2">
+                                <a href="{{ route('teams.index') }}" class="text-decoration-none">
+                                    Team
+                                </a>
+                            </li>
+                            <li class="me-2">
+                                <a href="{{ route('games.index') }}" class="text-decoration-none">
+                                    Games
+                                </a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,6 +97,9 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('jquery-3.6.3.min.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Standing;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $results = Standing::with('team')
+            ->orderBy('point', 'desc')
+            ->orderBy('sg', 'desc')
+            ->get();
+
+        return view('home', [
+            'results' => $results,
+        ]);
     }
 }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('k')->default(0);
             $table->unsignedInteger('gm')->default(0);
             $table->unsignedInteger('gk')->default(0);
-            $table->unsignedInteger('sg')->default(0);
+            $table->integer('sg')->default(0);
             $table->unsignedInteger('point')->default(0);
             $table->timestamps();
 

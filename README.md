@@ -6,36 +6,30 @@ Composer Version 2.2.5
 
 ## Installation
 
-Install dependencies `composer install`
+1. Install dependencies `composer install`
+2. Create new database
+3. Setup environtment variables in `.env` files
+4. Make file `.env` in root project
+5. Copy content `.env.example` to `.env`
+6. Configure DB connection in `.env` files
+   `DB_CONNECTION=mysql`
+   `DB_HOST='change db host'`
+   `DB_PORT='change db port'`
+   `DB_DATABASE='change db name'`
+   `DB_USERNAME='change db username'`
+   `DB_PASSWORD='change db password'`
 
-Create new database
-Setup environtment variables in `.env` files
-Make file `.env` in root project
-Copy content `.env.example` to `.env`
-Configure DB connection in `.env` files
+7. Run `php artisan key:generate` to generate app key
 
-```
-DB_CONNECTION=mysql
-DB_HOST='change db host'
-DB_PORT='change db port'
-DB_DATABASE='change db name'
-DB_USERNAME='change db username'
-DB_PASSWORD='change db password'
-```
+8. Run migration and seeder In console
+   `php artisan migrate --seed`
 
-Run `php artisan key:generate` to generate app key
+9. Run server In console
+   `php artisan serve`
 
-Run migration and seeder
-In console
-`php artisan migrate --seed`
-
-Run server
-In console
-`php artisan serve`
-
-Login Credentials
-email `test@example.com`
-password `password`
+10. Login Credentials
+    email `test@example.com`
+    password `password`
 
 ![List Team](https://github.com/Aditya170700/Football-Standings/blob/main/public/team.png?raw=true)
 

@@ -1,8 +1,8 @@
 ## Requirements
 
-PHP Version ^8.0.2
-Laravel Version ^9.19
-Composer Version 2.2.5
+-   PHP Version ^8.0.2
+-   Laravel Version ^9.19
+-   Composer Version 2.2.5
 
 ## Installation
 

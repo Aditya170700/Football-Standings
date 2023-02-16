@@ -27,5 +27,5 @@ Auth::routes([
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('teams', TeamController::class)->except(['show']);
-    Route::resource('games', GameController::class);
+    Route::resource('games', GameController::class)->only(['index', 'create', 'store']);
 });

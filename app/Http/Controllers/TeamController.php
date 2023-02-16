@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Team\StoreRequest;
+use App\Http\Requests\Team\UpdateRequest;
 use App\Models\Standing;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -39,13 +41,8 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:teams,name',
-            'kota' => 'required',
-        ]);
-
         try {
             DB::beginTransaction();
 
@@ -86,13 +83,8 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(UpdateRequest $request, Team $team)
     {
-        $request->validate([
-            'name' => 'required|unique:teams,name,' . $team->id . ',id',
-            'kota' => 'required',
-        ]);
-
         $team->update([
             'name' => $request->name,
             'kota' => $request->kota,

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Closure;
+use App\Http\Requests\Game\StoreRequest;
 use App\Models\Game;
 use App\Models\Team;
 use App\Models\Standing;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
@@ -48,41 +47,8 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'games' => 'required|array',
-            'games.*.home_id' => [
-                'required',
-                'different:games.*.away_id',
-                'exists:teams,id',
-                function (string $attribute, mixed $value, Closure $fail) use ($request) {
-                    $awayId = $request->games[explode('.', $attribute)[1]]['away_id'];
-                    if (Game::where('home_id', $value)->where('away_id', $awayId)->first()) {
-                        $fail('Tidak boleh ada pertandingan yang sama');
-                    }
-                },
-            ],
-            'games.*.away_id' => 'required|exists:teams,id',
-            'games.*.home_score' => 'required|integer|min:0',
-            'games.*.away_score' => 'required|integer|min:0',
-            'games.*.date' => 'required',
-        ], [
-            'games.*.home_id.required' => 'Home team required',
-            'games.*.home_id.different' => 'Home team must be different with away team',
-            'games.*.home_id.exists' => 'Home team must be exists in teams table',
-            'games.*.away_id.required' => 'Away team required',
-            'games.*.away_id.different' => 'Away team must be different with home team',
-            'games.*.away_id.exists' => 'Away team must be exists in teams table',
-            'games.*.home_score.required' => 'Home tean score required',
-            'games.*.home_score.integer' => 'Home team score must be number',
-            'games.*.home_score.min' => 'Home team score minimal 8',
-            'games.*.away_score.required' => 'Away tean score required',
-            'games.*.away_score.integer' => 'Away team score must be number',
-            'games.*.away_score.min' => 'Away team score minimal 8',
-            'games.*.date.required' => 'Match date required',
-        ]);
-
         try {
             DB::beginTransaction();
             Game::insert($request->games);
